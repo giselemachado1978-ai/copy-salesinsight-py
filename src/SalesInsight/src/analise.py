@@ -27,3 +27,23 @@ def criar_colunas_derivadas(df):
     print(df[["data_venda", "receita_total", "mes", "trimestre", "faixa_receita_item"]].head())
 
     return df
+
+def segmentar_clientes(df):
+    """Segmenta clientes pelo total gasto usando groupby e lambda."""
+
+    clientes = df.groupby("cliente")["receita_total"].sum().reset_index()
+    clientes.columns = ["cliente", "total_gasto"]
+
+    # Classificação usando função lambda com condicionais
+    clientes["segmento"] = clientes["total_gasto"].apply(
+        lambda gasto: "Ouro" if gasto > 15000
+                      else ("Prata" if gasto >= 5000 else "Bronze")
+    )
+
+    clientes = clientes.sort_values("total_gasto", ascending=False)
+
+    print("\n=== SEGMENTAÇÃO DE CLIENTES ===")
+    print(clientes.head(10).to_string(index=False))
+    print(f"\nDistribuição de segmentos:\n{clientes['segmento'].value_counts()}")
+
+    return clientes
