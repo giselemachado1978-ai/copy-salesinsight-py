@@ -32,3 +32,36 @@ def calcular_metricas(df):
         print(tabela.to_string(index=False))
 
     return metricas
+
+def calcular_estatisticas_numpy(df):
+    """Usa NumPy para calcular estatísticas sobre as receitas."""
+    print("\n=== ESTATÍSTICAS COM NUMPY ===")
+
+    receitas = df["receita_total"].to_numpy()  # Converte para array NumPy
+
+    media = np.mean(receitas)
+    mediana = np.median(receitas)
+    desvio_padrao = np.std(receitas)
+    total = np.sum(receitas)
+    p25 = np.percentile(receitas, 25)
+    p75 = np.percentile(receitas, 75)
+
+    print(f"  Receita média por venda:    R$ {media:.2f}")
+    print(f"  Receita mediana por venda:  R$ {mediana:.2f}")
+    print(f"  Desvio padrão:              R$ {desvio_padrao:.2f}")
+    print(f"  Receita total:              R$ {total:.2f}")
+    print(f"  Percentil 25 (Q1):          R$ {p25:.2f}")
+    print(f"  Percentil 75 (Q3):          R$ {p75:.2f}")
+
+    # Broadcasting: normalizar receitas entre 0 e 1
+    receitas_normalizadas = (receitas - receitas.min()) / (receitas.max() - receitas.min())
+    print(f"\n  Receitas normalizadas (primeiros 5): {receitas_normalizadas[:5].round(4)}")
+
+    # Operação vetorizada: identificar vendas acima da média sem loop
+    acima_da_media = receitas[receitas > media]
+    print(f"\n  Vendas acima da média: {len(acima_da_media)} de {len(receitas)}")
+
+    return {
+        "media": media, "mediana": mediana,
+        "desvio_padrao": desvio_padrao, "total": total
+    }
