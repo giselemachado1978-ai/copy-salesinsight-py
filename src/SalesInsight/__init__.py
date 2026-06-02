@@ -1,0 +1,1 @@
+from .salesinsight import SalesInsight
