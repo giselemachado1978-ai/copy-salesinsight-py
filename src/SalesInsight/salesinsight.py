@@ -120,8 +120,8 @@ class SalesInsight :
             dados_lidos = json.load(f)
         print(f"\n  Conteúdo do JSON exportado:\n  {json.dumps(dados_lidos, indent=2)}")
 
-    def exportar_csv(self, df):
-        df.to_csv("vendas.csv", index=False)
+    def exportar_csv(self, df, nome_arquivo):
+        df.to_csv(nome_arquivo, index=False)
         print(f"Dataset gerado com {len(df)} registros.")
         print(df.head())
         
