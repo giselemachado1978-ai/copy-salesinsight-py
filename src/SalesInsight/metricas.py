@@ -33,7 +33,7 @@ def calcular_metricas(df):
 
     return metricas
 
-def calcular_estatisticas_numpy(df):
+def calcular_estatisticas_numpy(df, np):
     """Usa NumPy para calcular estatísticas sobre as receitas."""
     print("\n=== ESTATÍSTICAS COM NUMPY ===")
 
