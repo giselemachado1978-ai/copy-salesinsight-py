@@ -120,6 +120,12 @@ class SalesInsight :
             dados_lidos = json.load(f)
         print(f"\n  Conteúdo do JSON exportado:\n  {json.dumps(dados_lidos, indent=2)}")
 
+    def exportar_csv(self, df):
+        df.to_csv("vendas.csv", index=False)
+        print(f"Dataset gerado com {len(df)} registros.")
+        print(df.head())
+        
+
 class SalesProjection(SalesInsight):
     def __init__(self, pd, np, meses_projecao=6, projecoes=[]):
         super().__init__(pd, np)
