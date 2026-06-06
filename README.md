@@ -1,5 +1,7 @@
 # SalesInsight PY
 
+## Grupo de trabalho: Gisele dos Santos Machado / Herbert Martins Cardozo / Susej Gonzalez
+
 ## Sobre o projeto
 
 O SalesInsight PY é um pipeline completo de análise de dados de vendas desenvolvido em Python.
